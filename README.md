@@ -15,7 +15,8 @@ g++ GradientDescent.cpp sgdRegressor.cpp CostFunction.cpp
 
 Run:
 
-You will need to format your CSV like this (with no header):
+You will need to format your CSV like this (with no header). The format should be all of the features seperated by commas
+then the target as the last column also seperated by a comma:
 
 ```bash
 # feature 1, feature 2, ... feature N, target (this line won't be in the actual file)
