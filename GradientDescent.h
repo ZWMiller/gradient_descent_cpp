@@ -15,7 +15,7 @@ private:
     
     vector<float> beta;
     vector<DataRow> trainingData;
-    OLS ols;
+    OLS* cost_function;
     float learningRate;
     int numEpochs;
     int numDataRows;
@@ -23,16 +23,14 @@ private:
     
 public:
    
-    GradientDescent(vector<DataRow>, float, int);
+    GradientDescent(vector<DataRow>, float learning_rate = 1e-5, int n_epochs = 10);
     ~GradientDescent();
     void fitModel();
-    void updateBeta(float, float, vector<float>);
-    float dotProduct(vector<float>, vector<float>);
     
     DataRow getDataRow(int n) { return trainingData.at(n);}
-    float getLearningRate() { return learningRate; }
-    vector<float> getModelParameters() { return beta; }
-    void printModelParameters();
+    float getLearningRate() { return cost_function->getLearningRate(); }
+    vector<float> getModelParameters() { return cost_function->getModelParameters(); }
+    void printModelParameters() { cost_function->printModelParameters(); }
 };
 
 #endif

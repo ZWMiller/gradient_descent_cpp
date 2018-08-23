@@ -10,18 +10,19 @@ int main(){
     // TO DO: Use command line args to read csv file
     
     vector<DataRow> dataset;
-    for (int i=0; i<40; i++){
+    for (int i=0; i<100; i++){
         vector<float> a;
         a.push_back(float(i));
-        dataset.push_back(DataRow(a, 2.*float(i)+float(rand()%10)/10.));
+        a.push_back(3.*float(100-i));
+        dataset.push_back(DataRow(a, 2.*a.at(0)+10.*a.at(1)+float(rand()%10)/10.));
         
     }
     
-    GradientDescent SGD = GradientDescent(dataset, 1e-5, 1000);
-    cout << "Init Beta: ";
+    GradientDescent SGD = GradientDescent(dataset);
+    cout << "Init Beta: \n";
     SGD.printModelParameters();
     SGD.fitModel();
-    cout << "\nFinal Beta: ";
+    cout << "\nFinal Beta: \n";
     SGD.printModelParameters();
     
     return 1;
