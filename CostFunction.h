@@ -12,6 +12,7 @@ class OLS {
     
 private:
     vector<float> beta;
+    float intercept;
     float learningRate;
     int numEpochs;
     int numDataCols;
@@ -34,7 +35,7 @@ public:
     float getLearningRate() { return learningRate; }
     vector<float> getModelParameters() { return beta; }
     void printModelParameters();
-    float dotProduct(vector<float>, vector<float>);
+    float makePrediction(vector<float>);
     
 };
 
