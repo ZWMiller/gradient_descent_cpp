@@ -7,6 +7,12 @@ using namespace std;
 using std::vector;
 
 class DataRow {
+    /*
+     Storage class. Just holds vector of features and
+     the associated target value, as well as providing
+     getters for the data (no setters to maintain data
+     integrity)
+     */
 
 private:
     vector<float> data;

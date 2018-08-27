@@ -1,5 +1,6 @@
-#include "GradientDescent.h"
-#include "DataRow.h"
+
+#include "include/GradientDescent.h"
+#include "include/DataRow.h"
 #include <vector>
 #include <cstdlib>
 #include <sstream>
@@ -20,7 +21,7 @@ vector<DataRow> read_csv(string filename){
      ---
      Input: filename (string)
      Output: vector of data rows
-    */
+     */
     vector<DataRow> dataset;
     ifstream readRecords;
     readRecords.open(filename);
@@ -64,14 +65,17 @@ vector<DataRow> generate_dataset(){
      as some additive noise.
      ---
      Output: vector of data rows
-    */
+     */
     vector<DataRow> dataset;
     
     for (int i=0; i<100; i++){
         vector<float> a;
+        int correct_class = 0;
         a.push_back(float(i));
         a.push_back(3.*float(100-i));
-        dataset.push_back(DataRow(a, 2.*a.at(0)+10.*a.at(1)+float(rand()%10)/10.));
+        
+        if (a.at(1) > 55) { correct_class = 1;}
+        dataset.push_back(DataRow(a, correct_class));
     }
     return dataset;
 }
@@ -79,16 +83,16 @@ vector<DataRow> generate_dataset(){
 int main(int argc, char *argv[]){
     /*
      Takes a user provided CSV and runs a gradient descent
-     solver on it. At present, this runs with an OLS cost
+     solver on it. At present, this with a logistic regression cost
      function.
      
      Main flow:
      Get data from CSV (or generate if no CSV)
-     Create a gradient descent model with OLS
+     Create a gradient descent model with cost_function
      fit that model
      print parameters
      */
-     
+    
     vector<DataRow> dataset;
     
     if (argc > 1 )
@@ -103,7 +107,7 @@ int main(int argc, char *argv[]){
         dataset = generate_dataset();
     }
     
-    GradientDescent SGD = GradientDescent(dataset, 1e-4, 1000, 0);
+    GradientDescent SGD = GradientDescent(dataset, 1e-4, 1000, 1);
     cout << "Init Beta: \n";
     SGD.printModelParameters();
     SGD.fitModel();
@@ -112,7 +116,7 @@ int main(int argc, char *argv[]){
     
     for (int i=0; i<SGD.getNumRows(); i++){
         cout << "Actual: " << dataset.at(i).getTarget() << " , Predict: " <<
-        SGD.predict(dataset.at(i).getData()) << endl;
+        SGD.predictProbability(dataset.at(i).getData()) << endl;
     }
     
     return 1;

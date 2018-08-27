@@ -8,7 +8,7 @@
 using namespace std;
 using std::vector;
 
-class OLS {
+class CostFunction {
     
 private:
     vector<float> beta;
@@ -19,8 +19,9 @@ private:
     
 public:
     
-    OLS(int num_data_cols, float learning_rate=1e-5, int num_epochs=10);
-    void updateParameters(float, vector<float>);
+    CostFunction(int num_data_cols, float learning_rate=1e-5, int num_epochs=10);
+    void updateParametersOLS(float, vector<float>);
+    void updateParametersLogistic(float, vector<float>);
     
     float getError(float actual_value, float predicted)
     {
@@ -36,6 +37,8 @@ public:
     vector<float> getModelParameters() { return beta; }
     void printModelParameters();
     float makePrediction(vector<float>);
+    float makePredictionProbability(vector<float>);
+    float logit(float);
     
 };
 
