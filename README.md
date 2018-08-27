@@ -9,8 +9,14 @@ Install:
 
 Clone this repository and run:
 
+For Regression:
 ```bash
 g++ GradientDescent.cpp sgdRegressor.cpp CostFunction.cpp
+```
+
+For Classification:
+```bash
+g++ GradientDescent.cpp sgdClassifier.cpp CostFunction.cpp
 ```
 
 Run:
