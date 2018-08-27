@@ -1,5 +1,5 @@
-#include "GradientDescent.h"
-#include "DataRow.h"
+#include "include/GradientDescent.h"
+#include "include/DataRow.h"
 #include <vector>
 #include <cstdlib>
 #include <sstream>
